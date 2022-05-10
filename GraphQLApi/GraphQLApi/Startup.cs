@@ -52,20 +52,13 @@ namespace GraphQLApi
                 app.UsePlayground(new PlaygroundOptions
                 {
                     QueryPath = "/api",
-                    Path = "/Playground"
+                    Path = "/graphql"
                 });
             }
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-                endpoints.MapGraphQL();
-            });
+            app.UseEndpoints(x => x.MapGraphQL("/api"));
         }
     }
 }
